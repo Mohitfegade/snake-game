@@ -11,6 +11,8 @@ const eatSound = new Audio("./sounds/eat.mp3");
 const gameOverSound = new Audio("./sounds/gameover.mp3");
 const startSound = new Audio("./sounds/start.mp3");
 const backgroundMusic = new Audio("./sounds/background.mp3");
+let touchStartX = 0;
+let touchStartY = 0;
 const blockHeight = 50;
 const blockWidth = 50;
 
@@ -163,4 +165,41 @@ addEventListener("keydown", (e)=>{
     }   
 })
 
+// Listen for the start of a touch
+window.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+});
 
+// Listen for the end of a touch
+window.addEventListener('touchend', (e) => {
+    let touchEndX = e.changedTouches[0].screenX;
+    let touchEndY = e.changedTouches[0].screenY;
+    handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+});
+
+function handleSwipe(startX, startY, endX, endY) {
+    let xDiff = endX - startX;
+    let yDiff = endY - startY;
+
+    let minSwipeDistance = 30; 
+
+    if (Math.abs(xDiff) < minSwipeDistance && Math.abs(yDiff) < minSwipeDistance) {
+        return; 
+    }
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0) {
+            direction = "right";
+        } else {
+            direction = "left";
+        }
+    } else {
+        
+        if (yDiff > 0) {
+            direction = "down";
+        } else {
+            direction = "up";
+        }
+    }
+}
