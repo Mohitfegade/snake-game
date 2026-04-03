@@ -203,3 +203,6 @@ function handleSwipe(startX, startY, endX, endY) {
         }
     }
 }
+window.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
