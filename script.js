@@ -144,7 +144,7 @@ backgroundMusic.volume = 0.01;
 backgroundMusic.play();
 
 modal.style.display = "none";
-snake = [{x:1, y:2}]   
+snake = [{x:2, y:1}]   
 food = {x: Math.floor(Math.random()*rows), y: Math.floor(Math.random()*cols)};
  intervalID = setInterval(()=>{
         render();
